@@ -1,5 +1,5 @@
 /* Prep List service worker — caches the whole app so it runs fully offline. */
-const VERSION = 'preplist-v1.0.0';
+const VERSION = 'preplist-v1.1.0';
 const ASSETS = [
   './',
   'index.html',

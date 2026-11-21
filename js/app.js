@@ -43,6 +43,7 @@
     snow: 'M22 11h-4.17l3.24-3.24-1.41-1.42L15 11h-2V9l4.66-4.66-1.42-1.41L13 6.17V2h-2v4.17L7.76 2.93 6.34 4.34 11 9v2H9L4.34 6.34 2.93 7.76 6.17 11H2v2h4.17l-3.24 3.24 1.41 1.42L9 13h2v2l-4.66 4.66 1.42 1.41L11 17.83V22h2v-4.17l3.24 3.24 1.42-1.41L13 15v-2h2l4.66 4.66 1.41-1.42L17.83 13H22z',
     info: 'M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z',
     sort: 'M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z',
+    undo: 'M12.5 8c-2.65 0-5.05.99-6.9 2.6L2 7v9h9l-3.62-3.62c1.39-1.16 3.16-1.88 5.12-1.88 3.54 0 6.55 2.31 7.6 5.5l2.37-.78C21.08 11.03 17.15 8 12.5 8z',
     leaf: 'M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z'
   };
   const ic = (n, cls) => '<svg class="i ' + (cls || '') + '" viewBox="0 0 24 24" aria-hidden="true"><path d="' + P[n] + '"/></svg>';
@@ -53,19 +54,82 @@
   const ui = { tab: 'home', q: '', recipeTab: 'recipes', ingQ: '', ingFilter: 'all', pantryAll: false, shopOrder: 'aisle', eraseArm: 0, lastTab: '' };
   try { const t = sessionStorage.getItem('preplist.tab'); if (t) ui.tab = t; } catch (_) { }
 
+  /* Recipe being edited: unsaved edits live in S (so the editor works as before) but are never written to
+     storage or the undo history until the person taps Save. */
+  let recEdit = null; // { id, orig, isNew }
+  function persistedState() {
+    if (!recEdit) return S;
+    const i = S.recipes.findIndex(r => r.id === recEdit.id);
+    if (i < 0) return S;
+    const recipes = S.recipes.slice();
+    if (recEdit.isNew) recipes.splice(i, 1); else recipes[i] = recEdit.orig;
+    return Object.assign({}, S, { recipes });
+  }
+
+  /* Undo history: one step per burst of changes (changes less than 2 s apart are grouped). */
+  const UNDO_KEY = 'preplist.undo.v1', UNDO_MAX = 15, UNDO_GAP = 2000;
+  let undoStack = [], redoStack = [];
+  try { const u = JSON.parse(localStorage.getItem(UNDO_KEY) || '[]'); if (Array.isArray(u)) undoStack = u.filter(x => x && typeof x.json === 'string'); } catch (_) { }
+  let lastPersisted = JSON.stringify(S), lastChangeAt = 0;
+  function storeUndo() {
+    for (;;) {
+      try { localStorage.setItem(UNDO_KEY, JSON.stringify(undoStack)); return; }
+      catch (_) { if (!undoStack.length) return; undoStack.shift(); }
+    }
+  }
+
   let saveT = null;
   function save() { clearTimeout(saveT); saveT = setTimeout(flush, 150); }
   function flush() {
     clearTimeout(saveT); saveT = null;
-    try { IO.save(localStorage, S); } catch (e) { snack('Could not save on this device (' + e.name + '). Export a backup in Settings.'); }
+    const json = JSON.stringify(persistedState());
+    if (json === lastPersisted) return;
+    const now = Date.now();
+    if (now - lastChangeAt > UNDO_GAP || !undoStack.length) {
+      undoStack.push({ json: lastPersisted, at: now });
+      if (undoStack.length > UNDO_MAX) undoStack.shift();
+      storeUndo();
+    }
+    lastChangeAt = now; redoStack = [];
+    write(json);
+    updateTopActions();
   }
+  function write(json) {
+    lastPersisted = json;
+    try { localStorage.setItem(IO.KEY, json); } catch (e) { snack('Could not save on this device (' + e.name + '). Export a backup in Settings.'); }
+  }
+  function restore(json) {
+    S = IO.migrate(JSON.parse(json));
+    write(JSON.stringify(S)); lastChangeAt = 0;
+    applyTheme(); render(); refreshSheets();
+  }
+  function undo() {
+    flush();
+    const step = undoStack.pop(); if (!step) { snack('Nothing to undo'); return; }
+    redoStack.push(lastPersisted); storeUndo();
+    restore(step.json);
+    snack('Undid the change from ' + agoText(step.at), redoStack.length ? { label: 'Redo', fn: redo } : null);
+  }
+  function redo() {
+    const json = redoStack.pop(); if (!json) return;
+    undoStack.push({ json: lastPersisted, at: Date.now() }); storeUndo();
+    const keep = redoStack; restore(json); redoStack = keep;
+    snack('Redone', { label: 'Undo', fn: undo });
+  }
+  function agoText(ts) {
+    const s = Math.round((Date.now() - ts) / 1000);
+    return s < 60 ? 'just now' : s < 3600 ? Math.round(s / 60) + ' min ago' : new Date(ts).toLocaleString('en-AU', { weekday: 'short', hour: 'numeric', minute: '2-digit' });
+  }
+  const undoBtn = () => undoStack.length ? '<button class="icon-btn" data-act="undo" aria-label="Undo last change" title="Undo last change">' + ic('undo') + '</button>' : '';
+  function updateTopActions() { const v = VIEWS[ui.tab] || VIEWS.home; const el = $('#topActions'); if (el) el.innerHTML = undoBtn() + (v.actions ? v.actions() : ''); }
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
   window.addEventListener('pagehide', flush);
 
   function withUndo(msg, fn) {
     const prev = JSON.stringify(S);
     fn(); save(); render(); refreshSheets();
-    snack(msg, { label: 'Undo', fn: () => { S = JSON.parse(prev); save(); render(); refreshSheets(); snack('Undone'); } });
+    flush();
+    snack(msg, { label: 'Undo', fn: () => { S = JSON.parse(prev); save(); flush(); render(); refreshSheets(); snack('Undone'); } });
   }
 
   /* ---------------- Helpers ---------------- */
@@ -164,7 +228,7 @@
     const changed = ui.lastTab !== ui.tab;
     keepFocus(main, () => {
       $('#title').textContent = v.title();
-      $('#topActions').innerHTML = v.actions ? v.actions() : '';
+      $('#topActions').innerHTML = undoBtn() + (v.actions ? v.actions() : '');
       main.innerHTML = '<div class="' + (changed ? 'view' : '') + '">' + v.html() + '</div>';
       $('#fab').innerHTML = v.fab ? v.fab() : '';
     });
@@ -486,7 +550,13 @@
   }
   function closeSheet() { if (sheets.length) history.back(); }
   function closeAllSheets() { const n = sheets.length; if (n) history.go(-n); }
-  window.addEventListener('popstate', () => { while (sheets.length > (history.state && history.state.sheet || 0)) popSheet(); });
+  window.addEventListener('popstate', () => {
+    while (sheets.length > (history.state && history.state.sheet || 0)) {
+      const top = sheets[sheets.length - 1];
+      if (top.opts.guard && top.opts.guard()) { history.pushState({ sheet: sheets.length }, ''); top.opts.onBlocked(); return; }
+      popSheet();
+    }
+  });
   function refreshSheets() { sheets.forEach(s => s.refresh()); }
   const sheetHead = (title, extra, full) => '<div class="sh">' + (full ? '<button class="icon-btn" data-act="closeSheet" aria-label="Back">' + ic('back') + '</button>' : '') + '<h2>' + h(title) + '</h2>' + (extra || '') + (full ? '' : '<button class="icon-btn" data-act="closeSheet" aria-label="Close">' + ic('close') + '</button>') + '</div>';
 
@@ -663,10 +733,23 @@
   }
 
   /* ---------- Recipe editor ---------- */
-  function recipeSheet(id) {
+  function recDirty() {
+    if (!recEdit) return false;
+    if (recEdit.isNew) return true;
+    const r = S.recipes.find(x => x.id === recEdit.id);
+    return !!r && JSON.stringify(r) !== JSON.stringify(recEdit.orig);
+  }
+  function recipeSheet(id, isNew) {
+    const r0 = S.recipes.find(x => x.id === id); if (!r0) return;
+    recEdit = { id, orig: JSON.parse(JSON.stringify(r0)), isNew: !!isNew };
     openSheet(() => {
-      const r = S.recipes.find(x => x.id === id); if (!r) return null;
-      let out = sheetHead(r.name, '<button class="icon-btn" data-act="dupRecipe" data-id="' + id + '" aria-label="Duplicate">' + ic('copy') + '</button><button class="icon-btn" data-act="delRecipe" data-id="' + id + '" aria-label="Delete">' + ic('del') + '</button>', true);
+      // Recipe gone (discarded/deleted while the editor is closing): render nothing rather than closing again.
+      const r = S.recipes.find(x => x.id === id); if (!r) return '';
+      const dirty = recDirty();
+      let out = '<div class="sh"><button class="icon-btn" data-act="recBack" aria-label="Back">' + ic('back') + '</button><h2>' + h(r.name) + '</h2>' +
+        '<button class="icon-btn" data-act="dupRecipe" data-id="' + id + '" aria-label="Duplicate">' + ic('copy') + '</button><button class="icon-btn" data-act="delRecipe" data-id="' + id + '" aria-label="Delete">' + ic('del') + '</button>' +
+        '<button class="btn" style="min-height:40px;padding:0 16px" data-act="recSave">Save</button></div>';
+      out += '<div class="small ' + (dirty ? '' : 'muted') + '" style="margin:-4px 4px 8px">' + (dirty ? (recEdit.isNew ? 'New recipe — not saved yet.' : 'Unsaved changes. Tap Save to keep them, or Discard to undo them.') : 'No unsaved changes.') + '</div>';
       out += '<label class="field"><span>Name</span><input class="input" id="r-name" data-in="recipe" data-id="' + id + '" data-f="name" value="' + h(r.name) + '"></label>' +
         '<div class="grid3"><label class="field"><span>Meal</span><select class="input" data-in="recipe" data-id="' + id + '" data-f="slot">' + SLOTS.map(([v, l]) => '<option value="' + v + '" ' + sel(v, r.slot) + '>' + l + '</option>').join('') + '</select></label>' +
         '<label class="field"><span>Days</span><input class="input" id="r-days" data-in="recipe" data-id="' + id + '" data-f="days" inputmode="numeric" value="' + h(r.days) + '"></label>' +
@@ -687,9 +770,17 @@
       out += '<div class="actions"><button class="btn tonal" data-act="riAdd" data-id="' + id + '">' + ic('add', 'sm') + 'Add ingredient</button></div></div>';
       out += '<h3 class="section-title">Instructions</h3><textarea class="input" id="r-instr" data-in="recipe" data-id="' + id + '" data-f="instructions" rows="8">' + h(r.instructions || '') + '</textarea>';
       out += '<h3 class="section-title">Nutrition · per serving</h3><div class="card" id="rNutr">' + recipeNutrHtml(r) + '</div>';
+      out += '<div class="actions"><button class="btn outline" data-act="recDiscard">Discard changes</button><button class="btn" data-act="recSave">Save</button></div>';
       return out;
-    }, { full: true });
+    }, { full: true, guard: recDirty, onBlocked: recConfirm });
   }
+  function recConfirm() {
+    openSheet(() => sheetHead(recEdit && recEdit.isNew ? 'Save this new recipe?' : 'Save your changes?') +
+      '<p class="small muted" style="margin:0 4px 12px">You have unsaved changes to this recipe.</p>' +
+      '<div class="actions"><button class="btn text" data-act="closeSheet">Keep editing</button><button class="btn outline" data-act="recDiscard" data-confirm="1">Discard</button><button class="btn" data-act="recSave" data-confirm="1">Save</button></div>');
+  }
+  /* Leave the recipe editor (and the confirm dialog, if it is open). */
+  function recLeave(fromConfirm) { recEdit = null; flush(); history.go(fromConfirm ? -2 : -1); }
   function recipeNutrHtml(r) {
     const n = C.recipeNutrition(r, S.ingredients, S.settings);
     let out = '<table class="ntable">' + C.NUTRIENTS.map(x => '<tr><td>' + x.name + '</td><td>' + (n.missing[x.id].length && !n.totals[x.id] ? '<span class="muted">—</span>' : (n.complete[x.id] ? '' : '≥ ') + (Math.round(n.totals[x.id] * 10) / 10) + ' ' + x.unit) + '</td></tr>').join('') + '</table>';
@@ -898,16 +989,40 @@
     openRecipe(el) { recipeSheet(el.dataset.id); },
     newRecipe() {
       const r = { id: 'r' + uid(), name: 'New recipe', slot: 'snack', enabled: true, days: 7, instructions: '', items: [] };
-      S.recipes.push(r); save(); render(); recipeSheet(r.id);
+      S.recipes.push(r); render(); recipeSheet(r.id, true);
     },
+    recSave(el) {
+      if (!recEdit) return;
+      if (!recDirty()) { recLeave(!!el.dataset.confirm); snack('No changes to save'); return; }
+      const r = S.recipes.find(x => x.id === recEdit.id), isNew = recEdit.isNew;
+      recLeave(!!el.dataset.confirm);
+      snack((r ? '“' + r.name + '”' : 'Recipe') + (isNew ? ' created' : ' saved'), { label: 'Undo', fn: undo });
+    },
+    recDiscard(el) {
+      if (!recEdit) return;
+      if (!recDirty()) { snack('No changes to discard'); return; }
+      const i = S.recipes.findIndex(x => x.id === recEdit.id);
+      if (i >= 0) { if (recEdit.isNew) S.recipes.splice(i, 1); else S.recipes[i] = recEdit.orig; }
+      if (el.dataset.confirm) { recLeave(true); snack('Changes discarded'); return; }
+      if (recEdit.isNew) { recLeave(false); snack('New recipe discarded'); return; }
+      recEdit.orig = JSON.parse(JSON.stringify(recEdit.orig)); render(); refreshSheets(); snack('Changes discarded');
+    },
+    recBack() { if (recDirty()) recConfirm(); else recLeave(false); },
+    undo() { undo(); },
     dupRecipe(el) {
+      if (recDirty()) { snack('Save or discard your changes first'); return; }
       const r = S.recipes.find(x => x.id === el.dataset.id);
       const c = JSON.parse(JSON.stringify(r)); c.id = 'r' + uid(); c.name = r.name + ' (copy)'; c.enabled = !!r.variantGroup ? false : r.enabled;
       if (c.variantGroup) c.variantLabel = (r.variantLabel || r.name) + ' (copy)';
-      S.recipes.splice(S.recipes.indexOf(r) + 1, 0, c); save(); closeSheet();
-      setTimeout(() => recipeSheet(c.id), 320); snack('Recipe duplicated');
+      S.recipes.splice(S.recipes.indexOf(r) + 1, 0, c); recLeave(false);
+      setTimeout(() => recipeSheet(c.id), 320); snack('Recipe duplicated', { label: 'Undo', fn: undo });
     },
-    delRecipe(el) { const id = el.dataset.id; closeSheet(); withUndo('Recipe deleted', () => { S.recipes = S.recipes.filter(r => r.id !== id); }); },
+    delRecipe(el) {
+      const id = el.dataset.id, wasNew = recEdit && recEdit.isNew;
+      if (recEdit) { const i = S.recipes.findIndex(x => x.id === recEdit.id); if (i >= 0 && !wasNew) S.recipes[i] = recEdit.orig; }
+      if (wasNew) { S.recipes = S.recipes.filter(r => r.id !== id); recLeave(false); snack('New recipe discarded'); return; }
+      recLeave(false); withUndo('Recipe deleted', () => { S.recipes = S.recipes.filter(r => r.id !== id); });
+    },
     riDel(el) { const r = S.recipes.find(x => x.id === el.dataset.id); r.items.splice(Number(el.dataset.idx), 1); save(); refreshSheets(); render(); },
     riAdd(el) {
       const id = el.dataset.id;
