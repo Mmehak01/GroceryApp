@@ -1,0 +1,1284 @@
+{
+ "app": "prep-list",
+ "version": 1,
+ "exportedAt": "2026-11-21T09:17:00.386Z",
+ "state": {
+  "schema": 1,
+  "createdAt": 1795083367788,
+  "settings": {
+   "theme": "light",
+   "tbspMl": 20,
+   "coldLast": true,
+   "recentDays": 30,
+   "lastStoreId": "coles-bayswater",
+   "targets": {
+    "kcal": 1600,
+    "protein": "",
+    "carbs": "",
+    "fat": "",
+    "fibre": ""
+   },
+   "lastBackupAt": 1795252304145
+  },
+  "ingredients": {
+   "yoghurt": {
+    "id": "yoghurt",
+    "name": "High-protein Greek yoghurt",
+    "category": "dairy",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 1,
+     "unit": "kg",
+     "label": "tub",
+     "yieldQty": "",
+     "yieldUnit": "",
+     "source": "Entered by you (setup brief)"
+    },
+    "nutrition": {
+     "basis": "100g"
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "protein-powder": {
+    "id": "protein-powder",
+    "name": "Protein powder",
+    "category": "tofu",
+    "form": "",
+    "countName": "scoop",
+    "countPlural": "scoops",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "banana": {
+    "id": "banana",
+    "name": "Banana",
+    "category": "fruit",
+    "form": "",
+    "countName": "banana",
+    "countPlural": "bananas",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "blueberries": {
+    "id": "blueberries",
+    "name": "Blueberries",
+    "category": "fruit",
+    "form": "frozen",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles",
+    "notes": "Coles 100% Natural Blueberries (frozen, big pack). \"<1 g\" values on the label entered as 0.5 g.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 49,
+     "protein": 0.5,
+     "carbs": 9.9,
+     "fat": 0,
+     "fibre": 3.6
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "strawberries": {
+    "id": "strawberries",
+    "name": "Strawberries",
+    "category": "fruit",
+    "form": "frozen",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles",
+    "notes": "Coles 100% Natural Strawberry Slices (frozen, big pack). \"<1 g\" values on the label entered as 0.5 g.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 25,
+     "protein": 0.5,
+     "carbs": 3.9,
+     "fat": 0.5,
+     "fibre": 2.5
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "almonds": {
+    "id": "almonds",
+    "name": "Almonds",
+    "category": "nuts",
+    "form": "",
+    "countName": "almond",
+    "countPlural": "almonds",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "walnuts": {
+    "id": "walnuts",
+    "name": "Walnuts",
+    "category": "nuts",
+    "form": "",
+    "countName": "half",
+    "countPlural": "halves",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "pepitas": {
+    "id": "pepitas",
+    "name": "Pepita kernels",
+    "category": "nuts",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "chia": {
+    "id": "chia",
+    "name": "Chia seeds",
+    "category": "nuts",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "sunflower": {
+    "id": "sunflower",
+    "name": "Sunflower seeds",
+    "category": "nuts",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "chickpeas-drained": {
+    "id": "chickpeas-drained",
+    "name": "Chickpeas (cooked, drained)",
+    "category": "canned",
+    "form": "drained",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles Simply",
+    "notes": "Coles Simply Chickpeas 420 g can. Nutrition is for the drained solids.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 420,
+     "unit": "g",
+     "label": "can",
+     "yieldQty": 225,
+     "yieldUnit": "g",
+     "source": "From the Coles Simply label (approx. 3 × 75 g drained serves)"
+    },
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 124,
+     "protein": 7.2,
+     "carbs": 15.7,
+     "fat": 2.1,
+     "fibre": 6.3
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "quinoa": {
+    "id": "quinoa",
+    "name": "White quinoa (dry)",
+    "category": "grains",
+    "form": "dry",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 500,
+     "unit": "g",
+     "label": "packet",
+     "yieldQty": "",
+     "yieldUnit": "",
+     "source": "Entered by you (setup brief)"
+    },
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "tofu": {
+    "id": "tofu",
+    "name": "Extra-firm tofu",
+    "category": "tofu",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Soyco",
+    "notes": "Soyco Hi-Protein Firm Tofu 350 g (firmness 8). Label gives 665 kJ/100 g; 159 kcal is converted from kJ.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 350,
+     "unit": "g",
+     "label": "packet",
+     "yieldQty": "",
+     "yieldUnit": "",
+     "source": "From the Soyco label"
+    },
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 159,
+     "protein": 19,
+     "carbs": 0.6,
+     "fat": 8.6,
+     "fibre": 1.7
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "feta": {
+    "id": "feta",
+    "name": "Reduced-fat feta cheese",
+    "category": "dairy",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "capsicum": {
+    "id": "capsicum",
+    "name": "Capsicum (small)",
+    "category": "veg",
+    "form": "",
+    "countName": "capsicum",
+    "countPlural": "capsicums",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "cucumber": {
+    "id": "cucumber",
+    "name": "Cucumber",
+    "category": "veg",
+    "form": "",
+    "countName": "cucumber",
+    "countPlural": "cucumbers",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "cherry-tomatoes": {
+    "id": "cherry-tomatoes",
+    "name": "Cherry tomatoes",
+    "category": "veg",
+    "form": "",
+    "countName": "tomato",
+    "countPlural": "tomatoes",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "red-onion": {
+    "id": "red-onion",
+    "name": "Red onion",
+    "category": "veg",
+    "form": "",
+    "countName": "onion",
+    "countPlural": "onions",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "spinach": {
+    "id": "spinach",
+    "name": "Baby spinach",
+    "category": "veg",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "olive-oil": {
+    "id": "olive-oil",
+    "name": "Extra virgin olive oil",
+    "category": "oils",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "ml",
+     "low": false
+    }
+   },
+   "lemon": {
+    "id": "lemon",
+    "name": "Lemon",
+    "category": "fruit",
+    "form": "",
+    "countName": "lemon",
+    "countPlural": "lemons",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "lime": {
+    "id": "lime",
+    "name": "Lime",
+    "category": "fruit",
+    "form": "",
+    "countName": "lime",
+    "countPlural": "limes",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "oregano": {
+    "id": "oregano",
+    "name": "Dried oregano",
+    "category": "spices",
+    "form": "dried",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "garlic-powder": {
+    "id": "garlic-powder",
+    "name": "Garlic powder",
+    "category": "spices",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "salt": {
+    "id": "salt",
+    "name": "Salt",
+    "category": "spices",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "pepper": {
+    "id": "pepper",
+    "name": "Black pepper",
+    "category": "spices",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "black-beans-drained": {
+    "id": "black-beans-drained",
+    "name": "Black beans (drained)",
+    "category": "canned",
+    "form": "drained",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 400,
+     "unit": "g",
+     "label": "can",
+     "yieldQty": 240,
+     "yieldUnit": "g",
+     "source": "Entered by you (setup brief)"
+    },
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "tomato": {
+    "id": "tomato",
+    "name": "Tomato (medium)",
+    "category": "veg",
+    "form": "",
+    "countName": "tomato",
+    "countPlural": "tomatoes",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "avocado": {
+    "id": "avocado",
+    "name": "Avocado",
+    "category": "fruit",
+    "form": "",
+    "countName": "avocado",
+    "countPlural": "avocados",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "cumin": {
+    "id": "cumin",
+    "name": "Ground cumin",
+    "category": "spices",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "paprika": {
+    "id": "paprika",
+    "name": "Paprika",
+    "category": "spices",
+    "form": "",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "",
+    "notes": "",
+    "price": "",
+    "priceUnit": "",
+    "pkg": null,
+    "nutrition": null,
+    "pantry": {
+     "mode": "staple",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "raspberries": {
+    "id": "raspberries",
+    "name": "Raspberries",
+    "category": "fruit",
+    "form": "frozen",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles",
+    "notes": "Coles 100% Natural Raspberries 500 g (frozen). \"<1 g\" values on the label entered as 0.5 g.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 500,
+     "unit": "g",
+     "label": "bag",
+     "yieldQty": "",
+     "yieldUnit": "",
+     "source": "From the Coles label"
+    },
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 45,
+     "protein": 1.1,
+     "carbs": 6.8,
+     "fat": 0.5,
+     "fibre": 5.6
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "blackberries": {
+    "id": "blackberries",
+    "name": "Blackberries",
+    "category": "fruit",
+    "form": "frozen",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles",
+    "notes": "Coles 100% Natural Blackberries 500 g (frozen). \"<1 g\" values on the label entered as 0.5 g.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 500,
+     "unit": "g",
+     "label": "bag",
+     "yieldQty": "",
+     "yieldUnit": "",
+     "source": "From the Coles label"
+    },
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 51,
+     "protein": 1.4,
+     "carbs": 7.5,
+     "fat": 0.5,
+     "fibre": 6.1
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   },
+   "kidney-beans-drained": {
+    "id": "kidney-beans-drained",
+    "name": "Red kidney beans (drained)",
+    "category": "canned",
+    "form": "drained",
+    "countName": "",
+    "countPlural": "",
+    "gPerCount": "",
+    "density": "",
+    "brand": "Coles Certified Organic",
+    "notes": "Coles Certified Organic Red Kidney Beans 420 g can. Nutrition is for the drained solids. \"<1 g\" values on the label entered as 0.5 g.",
+    "price": "",
+    "priceUnit": "",
+    "pkg": {
+     "size": 420,
+     "unit": "g",
+     "label": "can",
+     "yieldQty": 252,
+     "yieldUnit": "g",
+     "source": "From the Coles label (3 × approx. 84 g drained serves)"
+    },
+    "nutrition": {
+     "basis": "100g",
+     "kcal": 104,
+     "protein": 7.4,
+     "carbs": 14.2,
+     "fat": 0.5,
+     "fibre": 6.7
+    },
+    "pantry": {
+     "mode": "buy",
+     "haveQty": "",
+     "haveUnit": "g",
+     "low": false
+    }
+   }
+  },
+  "recipes": [
+   {
+    "name": "High-Protein Smoothie",
+    "slot": "breakfast",
+    "enabled": true,
+    "days": 7,
+    "instructions": "1. Add yoghurt and protein powder (if using) to the blender.\n2. Add banana, berries, nuts and seeds.\n3. Add a splash of water or ice for a thinner smoothie.\n4. Blend 45–60 seconds until smooth. Tip: freeze pre-portioned bags of fruit, nuts and seeds for the week.",
+    "id": "breakfast-powder",
+    "variantGroup": "smoothie",
+    "variantLabel": "With powder",
+    "items": [
+     {
+      "qty": 170,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "yoghurt"
+     },
+     {
+      "qty": 1,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "protein-powder"
+     },
+     {
+      "qty": 1,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "banana"
+     },
+     {
+      "qty": 60,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "blueberries"
+     },
+     {
+      "qty": 100,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "strawberries"
+     },
+     {
+      "qty": 5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "almonds"
+     },
+     {
+      "qty": 2,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "walnuts"
+     },
+     {
+      "qty": 1,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "pepitas"
+     },
+     {
+      "qty": 1,
+      "unit": "tbsp",
+      "alts": [],
+      "use": "",
+      "ingId": "chia"
+     },
+     {
+      "qty": 1,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "sunflower"
+     }
+    ]
+   },
+   {
+    "name": "High-Protein Smoothie (no powder)",
+    "slot": "breakfast",
+    "enabled": false,
+    "days": 7,
+    "instructions": "1. Add yoghurt to the blender.\n2. Add banana, berries, nuts and seeds.\n3. Add a splash of water or ice for a thinner smoothie.\n4. Blend 45–60 seconds until smooth. Tip: freeze pre-portioned bags of fruit, nuts and seeds for the week.",
+    "id": "breakfast-nopowder",
+    "variantGroup": "smoothie",
+    "variantLabel": "No powder",
+    "items": [
+     {
+      "qty": 400,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "yoghurt"
+     },
+     {
+      "qty": 0.5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "banana"
+     },
+     {
+      "qty": 60,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "blueberries"
+     },
+     {
+      "qty": 100,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "strawberries"
+     },
+     {
+      "qty": 5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "almonds"
+     },
+     {
+      "qty": 2,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "walnuts"
+     },
+     {
+      "qty": 1,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "pepitas"
+     },
+     {
+      "qty": 1,
+      "unit": "tbsp",
+      "alts": [],
+      "use": "",
+      "ingId": "chia"
+     },
+     {
+      "qty": 1,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "sunflower"
+     }
+    ]
+   },
+   {
+    "name": "Mediterranean Chickpea Protein Salad",
+    "slot": "lunch",
+    "enabled": true,
+    "days": 7,
+    "instructions": "1. Rinse 30 g dry quinoa and simmer in ~60 ml water for 12–15 min, then cool.\n2. Press the tofu for 10 min, cube, and pan-fry or air-fry until golden (season with oregano and garlic powder).\n3. Chop capsicum, cucumber, cherry tomatoes and red onion.\n4. Combine spinach, chickpeas, quinoa, vegetables and tofu.\n5. Crumble feta on top. Dress with olive oil, lemon juice, oregano, garlic powder, salt and pepper.\nMeal prep: store dressing separately; keeps 3–4 days refrigerated.",
+    "id": "lunch",
+    "items": [
+     {
+      "qty": 125,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "chickpeas-drained"
+     },
+     {
+      "qty": 30,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "quinoa"
+     },
+     {
+      "qty": 150,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "tofu"
+     },
+     {
+      "qty": 1,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "capsicum"
+     },
+     {
+      "qty": 0.5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "cucumber"
+     },
+     {
+      "qty": 10,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "cherry-tomatoes"
+     },
+     {
+      "qty": 0.25,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "red-onion"
+     },
+     {
+      "qty": 30,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "spinach"
+     },
+     {
+      "qty": 1,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "olive-oil"
+     },
+     {
+      "qty": 0.5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "lemon"
+     },
+     {
+      "qty": 0.5,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "oregano"
+     },
+     {
+      "qty": 0.5,
+      "unit": "tsp",
+      "alts": [],
+      "use": "",
+      "ingId": "garlic-powder"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "salt"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "pepper"
+     }
+    ]
+   },
+   {
+    "name": "Quinoa, Black Bean & Tofu Protein Bowl",
+    "slot": "dinner",
+    "enabled": true,
+    "days": 7,
+    "instructions": "1. Rinse 40 g dry quinoa and simmer in ~80 ml water for 12–15 min.\n2. Press and cube the tofu; toss with cumin, paprika, garlic powder, salt and pepper; pan-fry, bake or air-fry until crisp.\n3. Warm the drained black beans with a pinch of cumin.\n4. Wilt the spinach briefly in the pan (or serve fresh).\n5. Assemble quinoa, beans, spinach, tofu and diced tomato; top with sliced avocado and squeeze over lemon or lime juice.",
+    "id": "dinner",
+    "items": [
+     {
+      "qty": 40,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "quinoa"
+     },
+     {
+      "qty": 250,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "black-beans-drained"
+     },
+     {
+      "qty": 120,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "spinach"
+     },
+     {
+      "qty": 1,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "tomato"
+     },
+     {
+      "qty": 0.5,
+      "unit": "pc",
+      "alts": [],
+      "use": "",
+      "ingId": "avocado"
+     },
+     {
+      "qty": 200,
+      "unit": "g",
+      "alts": [],
+      "use": "",
+      "ingId": "tofu"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [
+       "lime"
+      ],
+      "use": "",
+      "ingId": "lemon"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "garlic-powder"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "cumin"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "paprika"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "salt"
+     },
+     {
+      "qty": "",
+      "unit": "taste",
+      "alts": [],
+      "use": "",
+      "ingId": "pepper"
+     }
+    ]
+   }
+  ],
+  "stores": [
+   {
+    "id": "coles-bayswater",
+    "name": "Coles Bayswater",
+    "chain": "coles",
+    "address": "Bayswater VIC 3153",
+    "layout": null,
+    "aisleDir": "asc",
+    "builtIn": true
+   },
+   {
+    "id": "woolworths-boronia",
+    "name": "Woolworths Boronia",
+    "chain": "woolworths",
+    "address": "Boronia VIC 3155",
+    "layout": null,
+    "aisleDir": "asc",
+    "builtIn": true
+   },
+   {
+    "id": "other",
+    "name": "Other supermarket",
+    "chain": "other",
+    "address": "",
+    "layout": null,
+    "aisleDir": "asc",
+    "builtIn": true
+   }
+  ],
+  "products": {},
+  "list": {
+   "id": "Lmwneaf71",
+   "startedAt": 1795083367789,
+   "checks": {},
+   "removed": {},
+   "qtyOverride": {},
+   "custom": []
+  },
+  "history": [],
+  "trip": null
+ }
+}
